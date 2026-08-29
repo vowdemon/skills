@@ -1,0 +1,4 @@
+interface:
+  display_name: "PRD Design"
+  short_description: "Structure product requirement documents."
+  default_prompt: "Use $prd-design to design or review a PRD."

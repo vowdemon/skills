@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test Design"
+  short_description: "Design high-value, low-fragility tests."
+  default_prompt: "Use $test-design to design, review, layer, prune, or move this test suite."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Design"
+  short_description: "Design maintainable code changes."
+  default_prompt: "Use $code-design to design this code change."

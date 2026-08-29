@@ -1,0 +1,4 @@
+interface:
+  display_name: "Wenyan"
+  short_description: "以文言风格作简洁中文回复。"
+  default_prompt: "使用 $wenyan，以文言风格简洁作答。"

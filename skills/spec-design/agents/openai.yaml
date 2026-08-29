@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spec Design"
+  short_description: "Define verifiable feature behavior."
+  default_prompt: "Use $spec-design to turn this requirement into a feature spec."
