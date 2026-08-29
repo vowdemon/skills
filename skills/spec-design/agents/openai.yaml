@@ -1,4 +1,4 @@
 interface:
   display_name: "Spec Design"
-  short_description: "Define verifiable feature behavior."
-  default_prompt: "Use $spec-design to turn this requirement into a feature spec."
+  short_description: "For capability specs before code design."
+  default_prompt: "Use $spec-design when a PRD, feature, bug, or existing spec needs a stable behavior contract before code design."
