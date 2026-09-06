@@ -1,0 +1,4 @@
+interface:
+  display_name: "Normative Writing"
+  short_description: "Normalize settled rules without changing meaning."
+  default_prompt: "Use $normative-writing to normalize this settled technical specification without changing its meaning."

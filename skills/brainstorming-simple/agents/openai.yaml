@@ -1,0 +1,4 @@
+interface:
+  display_name: "Brainstorming Simple"
+  short_description: "Turn ideas into approved designs."
+  default_prompt: "Use $brainstorming-simple to clarify and design this change before implementation."
