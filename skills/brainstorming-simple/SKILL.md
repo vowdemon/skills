@@ -12,11 +12,10 @@ through your path: understand the context, refine the idea, present a
 design, and get your human partner's approval.
 
 <HARD-GATE>
-Do NOT invoke any implementation skill, write any code, scaffold any
-project, or take any implementation action until you have told your
-human partner what you intend and they have approved it. This applies
-to EVERY task on EVERY path below — the ceremony scales with the task;
-the approval gate never does.
+Do NOT scaffold any project, or take any implementation action until
+you have told your human partner what you intend and they have approved
+it. This applies to EVERY task on EVERY path below — the ceremony scales
+with the task; the approval gate never does.
 </HARD-GATE>
 
 ## Three Paths
@@ -45,7 +44,7 @@ override it:
 - **Architectural** — new projects, new subsystems, changes that
   restructure how components fit together or alter interfaces others
   depend on. Follow the full process: questions, approaches, sectioned
-  design, written spec, then the writing-plans skill.
+  design, written spec, then an implementation plan.
 
 When in doubt between two paths, take the heavier one. The ratchet is
 one-way: hidden complexity discovered mid-task upgrades the path —
@@ -97,7 +96,7 @@ your path and complete them in order.
 3. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria
 4. **Propose 2-3 approaches** — with trade-offs and your recommendation
 5. **Present design** — in sections scaled to their complexity, get user approval after each section
-6. **Transition to implementation** — invoke writing-plans skill to create implementation plan
+6. **Transition to implementation** — create an implementation plan
 
 ## Process Flow
 
@@ -115,7 +114,7 @@ digraph brainstorming {
     "Propose 2-3 approaches" [shape=box];
     "Present design sections" [shape=box];
     "User approves design?" [shape=diamond];
-    "Invoke writing-plans skill" [shape=doublecircle];
+    "Create implementation plan" [shape=doublecircle];
     "Hidden complexity? Upgrade path" [shape=box];
     "Classify: spike / bounded / architectural" -> "Present question + probe (2-3 sentences)" [label="spike"];
     "Classify: spike / bounded / architectural" -> "Ask clarifying questions (bounded)" [label="bounded"];
@@ -131,16 +130,14 @@ digraph brainstorming {
     "Propose 2-3 approaches" -> "Present design sections";
     "Present design sections" -> "User approves design?";
     "User approves design?" -> "Present design sections" [label="no, revise"];
-    "User approves design?" -> "Invoke writing-plans skill" [label="yes"];
+    "User approves design?" -> "Create implementation plan" [label="yes"];
 }
 ```
 
-**Terminal states are path-bound.** Architectural: the ONLY skill you
-invoke after brainstorming is writing-plans — never frontend-design,
-mcp-builder, or any other implementation skill. Bounded: after
-approval, implementation proceeds directly through the normal
-development workflow; no plan document. Spike: the terminal state is a
-reported recommendation.
+**Terminal states are path-bound.** Bounded: after approval,
+implementation proceeds directly through the normal development
+workflow; no plan document. Spike: the terminal state is a reported
+recommendation.
 
 ## The Process
 
