@@ -15,3 +15,4 @@ This repository contains a collection of Codex Skills for product design, techni
 ## Sources
 
 - `brainstorming-simple` is sourced from [`obra/superpowers`](https://github.com/obra/superpowers).
+- `code-design` incorporates adapted ideas about interface leverage and change locality from [`mattpocock/skills`](https://github.com/mattpocock/skills/tree/main/skills/engineering/codebase-design).
