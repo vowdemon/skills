@@ -1,10 +1,10 @@
 ---
 name: code-design
-description: Use when designing, implementing, or changing code to decide how requirements should shape structure, ownership, interfaces, abstractions, reuse, and refactoring scope.
+description: You MUST use this for any code design or implementation. Decide how requirements shape structure, ownership, interfaces, abstractions, reuse, and refactoring scope in new or existing code.
 license: MIT
 metadata:
   author: vowdemon
-  version: "1.1"
+  version: "1.2"
 ---
 
 # Code Design
@@ -130,5 +130,7 @@ For exploration, present the question, hypothesis, bounded probe, observed evide
 Explain one complete main path before its qualifications. State when an alternative becomes appropriate instead of leaving several options for the reader to resolve. Use short sentences with explicit subjects and give each paragraph one explanatory purpose. Explain unfamiliar terms where they carry the choice. If space is limited, remove repeated reasoning and secondary branches before cutting the decisive mechanism. Format code so state changes and control flow remain easy to follow.
 
 Use a relationship diagram when it clarifies ownership or dependencies, a flowchart for branching, or a sequence diagram for interaction order. Label the connections and use the same roles, states, and operations across prose, diagram, and code. Let each contribute information instead of repeating the same content three times. A small local design may need no diagram.
+
+After completing a code design, use `$code-review` to assess the resulting proposal before delivery.
 
 Finish when the supported choice, responsibilities, and visible mechanism agree, with consequential unknowns still explicit. For a completed probe, finish with its evidence and conclusion within the agreed bound. Report what was actually implemented or verified separately from proposals. Do not substitute a design essay for authorized implementation work.

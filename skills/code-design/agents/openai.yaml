@@ -1,4 +1,4 @@
 interface:
   display_name: "Code Design"
-  short_description: "Design maintainable code changes."
+  short_description: "Design code architecture and data structures."
   default_prompt: "Use $code-design to design this code change."

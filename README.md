@@ -1,16 +1,20 @@
 # Skills
 
-This repository contains a collection of Codex Skills for product design, technical design, testing, and collaboration.
+**AI is already highly capable; a SKILL should orchestrate its abilities rather than duplicate knowledge it already possesses.**
 
-| Skill                                                        | Description                                                                                                                                                                      |
-| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [brainstorming-simple](skills/brainstorming-simple/SKILL.md) | Clarifies goals, requirements, and possible approaches before creative or implementation work, using a lightweight discussion or a full design process based on task complexity. |
-| [code-design](skills/code-design/SKILL.md)                   | Helps design and review code changes with attention to module boundaries, ownership, abstractions, coupling, testability, and change size.                                       |
-| [git-commit](skills/git-commit/SKILL.md)                     | Safely inspects, splits, stages, and commits changes while producing clear, consistent Git commit messages.                                                                      |
-| [prd-design](skills/prd-design/SKILL.md)                     | Writes or reviews PRDs by clarifying the problem, target users, scope, success metrics, acceptance criteria, risks, and dependencies.                                            |
-| [spec-design](skills/spec-design/SKILL.md)                   | Turns product ideas or PRDs into stable, verifiable, implementation-independent specifications and identifies ambiguity or missing details.                                      |
-| [test-design](skills/test-design/SKILL.md)                   | Designs and reviews test strategies, selecting the right test layer based on risk while reducing fragile and redundant tests.                                                    |
-| [wenyan](skills/wenyan/SKILL.md)                             | Uses concise Classical Chinese phrasing when brevity is preferred while preserving the accuracy and readability of technical terms.                                              |
+Type describes how a skill directs work: heuristic processes guide judgment, prescriptive processes define required steps, and strict modes impose a constrained response style.
+
+| Skill                                                        | Type          | Description                                                                                                                           |
+| ------------------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| [brainstorming-simple](skills/brainstorming-simple/SKILL.md) | Prescriptive Process | Clarifies goals, requirements, and options before creative or implementation work.                                                    |
+| [code-design](skills/code-design/SKILL.md)                   | Heuristic Process     | Designs code architecture and data structures with clear ownership, interfaces, and refactoring boundaries.                           |
+| [code-review](skills/code-review/SKILL.md)                   | Prescriptive Process | Reviews behavior and architecture after code design or implementation, including contracts, state, lifecycles, and module boundaries. |
+| [git-commit](skills/git-commit/SKILL.md)                     | Prescriptive Process | Inspects changes, stages deliberately, and prepares safe Conventional Commits with appropriate verification.                          |
+| [normative-writing](skills/normative-writing/SKILL.md)       | Prescriptive Process | Normalizes settled technical rules into precise, compact, and internally consistent normative text.                                   |
+| [prd-design](skills/prd-design/SKILL.md)                     | Prescriptive Process | Writes and reviews PRDs by clarifying goals, users, scope, metrics, acceptance criteria, risks, and dependencies.                     |
+| [spec-design](skills/spec-design/SKILL.md)                   | Prescriptive Process | Turns ideas, bugs, and PRDs into stable, verifiable behavior specifications before code design.                                       |
+| [test-design](skills/test-design/SKILL.md)                   | Heuristic Process     | Designs and reviews test systems around consequential claims, trustworthy evidence, and testability.                                  |
+| [wenyan](skills/wenyan/SKILL.md)                             | Strict Mode           | Uses concise Classical Chinese when brevity or a Wenyan response style is requested.                                                  |
 
 ## Sources
 
