@@ -1,10 +1,10 @@
 ---
 name: code-review
-description: You MUST use this after any code design or implementation. Review behavior and architecture in code changes, modules, and design proposals, including code reviews, refactoring assessments, and design evaluations at any stage. Examine contracts, naming, responsibilities, state, lifecycles, and module boundaries.
+description: You MUST use this once before delivery after completing a code design or implementation batch, and when explicitly asked to review code, a change, module, or design. Review behavior and architecture, including contracts, naming, responsibilities, state, lifecycles, and module boundaries.
 license: MIT
 metadata:
   author: vowdemon
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Code Review
@@ -14,6 +14,8 @@ Review whether behavior satisfies its contracts and whether the structure assign
 Behavior and architecture both carry review obligations. Development stage changes emphasis, not whether either dimension matters. Architecture has independent preventive value: a demonstrated false concept, responsibility leak, or missing constraint does not need a runtime incident to become actionable.
 
 Before delivery, review the resulting proposal or change at a depth proportional to the work. Resolve substantiated issues within the authorized task before reporting completion.
+
+Treat the review of one completed work batch as one bounded pass. Repairs made in response to that pass belong to the same review and require focused re-verification; they do not by themselves trigger another full review.
 
 ## Core Judgment
 
@@ -25,6 +27,7 @@ Before delivery, review the resulting proposal or change at a depth proportional
 - **Respect effective project decisions.** Account for language, framework, scale, and architectural intent. Existing patterns are evidence, not automatic authority; project conventions do not erase demonstrated defects.
 - **Prevent supported problems early.** Correct current design mismatches and constraint gaps, including their use as templates for further implementation. Do not invent future requirements or claim that possible downstream damage has already occurred.
 - **Recommend the smallest complete repair.** Restore the violated contract across established same-cause paths, then exclude unrelated change. Minimize unnecessary change, not changed lines.
+- **Make repairs converge.** Prefer removing invalid states, sharing, or duplicated coordination over adding compensating mechanisms. If a repair creates another problem of the same class, reconsider the repair rather than layering another patch onto it.
 
 ## Scope, Stage, and Contracts
 
@@ -52,6 +55,8 @@ Read relevant requirements, acceptance criteria, project instructions, architect
 
 Build only the system model needed for this scope: inputs and outputs; important invariants and when they must hold; state and resource owners; mutation and commit points; irreversible effects; and changes the boundaries are intended to absorb.
 
+Before detailed review, choose the important contracts, paths, boundaries, and applicable risk areas for this pass. Keep that coverage frame stable. Follow callers, callees, ownership, and same-cause paths when they are necessary to establish or refute a candidate, but do not expand into an unrelated risk area merely because adjacent code suggests another possible concern.
+
 ## Design Checks and Reference Routing
 
 Keep the following checks active throughout review. Read the linked sections when assessing the corresponding area; do not wait for a behavior bug to trigger design reading. A small scope may need only a few sections. A broad review should examine the applicable areas and record any important omissions.
@@ -73,11 +78,13 @@ Keep the following checks active throughout review. Read the linked sections whe
 
 Prioritize relevant risks: identity/data isolation, irreversible effects, mutable authority, asynchronous commits, partial failure, public contracts, duplicated rules, and foundational interfaces that are spreading. Adapt to the actual system instead of applying an exhaustive generic checklist.
 
+Perform one deliberate discovery pass across the planned coverage. Use the applicable behavior and design perspectives to generate candidates; do not repeatedly rescan the same work merely to produce additional findings. After that pass, switch from discovery to verification.
+
 Trace behavior as **entry → preconditions → decision/state transition → effects → result/commit → failure and recovery**. For stateful, asynchronous, externally interacting, or compatibility-sensitive paths, read the relevant sections of [Behavioral Verification](references/behavioral-verification.md). That reference also supplies scenario-based checks for designs with no executable implementation.
 
 Trace structure as **intended constraint → knowledge and responsibility owner → public capability → actual use/dependency → guarantee and change propagation**.
 
-Use behavior to locate structural causes, and structure to find unexamined behavior paths. Do not postpone all architecture work until behavior review is finished, or let extensive design analysis substitute for tracing actual execution.
+Within the planned coverage, use behavior to locate structural causes and structure to identify behavior paths needed to test the same contracts or constraints. Follow evidence to the responsible cause, but do not use either direction to begin a new general survey of adjacent behavior or architecture. Do not postpone all architecture work until behavior review is finished, or let extensive design analysis substitute for tracing actual execution.
 
 ### Verify candidates and counterevidence
 
@@ -95,15 +102,27 @@ A surface feature is a lead. A demonstrated design mismatch is evidence. For exa
 
 If an unknown fact determines whether the defect exists, keep it as an unresolved lead. If the defect is established but its reach or frequency is uncertain, report the established scope and qualify the rest. Do not launder speculation into a confirmed finding with a low-confidence label.
 
+Verification may refine a candidate, replace a symptom with its responsible cause, or include additional manifestations that share that cause. An independent issue already established by direct evidence within the planned scope may still be retained, but it must not initiate another general discovery pass. A merely suspicious adjacent observation remains outside this pass.
+
+This allowance applies while verifying the original review candidates. During repair verification, a defect caused by the repair is evidence against that repair, not permission to begin another candidate-and-patch chain.
+
+An unresolved lead is terminal for this review pass. Do not continue investigating it merely because time or context remains. Reopen it only when the user requests further investigation or new evidence becomes available.
+
 ### Resolve findings and repair scope
 
-Retain every independent, substantiated, actionable issue; do not aim at a finding count or a behavior/architecture quota. Group by a specific shared cause and cohesive correction, not by module, principle, or the possibility of one large rewrite. Do not count one cause twice as separate behavior and architecture issues.
+Retain every independent, substantiated, actionable issue established within the planned review boundary; do not aim at a finding count or a behavior/architecture quota. The absence of a finding limit is not an instruction to continue searching after the planned coverage and candidate verification are complete. Group by a specific shared cause and cohesive correction, not by module, principle, or the possibility of one large rewrite. Do not count one cause twice as separate behavior and architecture issues.
 
 Read [Findings and Remediation](references/findings-and-remediation.md) when deciding disputed grouping, priority, uncertainty, or repair sufficiency. Its priority definitions apply unless the user or project supplies another scheme.
 
 Use P0–P3 for action priority: immediate catastrophic issues; important issues before the relevant delivery or design commitment; substantive issues to schedule; and limited local issues. Assess impact, reach, likelihood, recoverability, established goals, and specific repair windows separately from evidence strength. Architecture is not automatically P3, and cheap repair alone does not justify escalation.
 
+Before modifying code for a state, concurrency, or lifecycle finding, state the required semantics and invariant, the responsible owner or serialization domain, the relevant actors that can mutate or publish, and the point at which an operation may commit. Evaluate the proposed mechanism across the established paths before implementing it; do not discover the coordination design through a sequence of pairwise patches.
+
+Prefer repairs that reduce invalid states, shared mutation, or independent coordination rules. New flags, counters, generation tokens, locks, queues, callbacks, or lifecycle states are justified only when they enforce a distinct established guarantee and have clear ownership and validity. Do not accumulate mechanisms whose primary purpose is to compensate for interactions introduced by the preceding repair.
+
 A complete repair restores the contract at the responsible boundary across established same-cause paths. Check whether callers can still bypass it, whether legitimate use remains possible, and whether the recommendation introduces unrelated changes. State the required invariant and acceptance criteria when evidence does not support choosing an implementation. Necessary structural correction is part of repair. Mitigation must identify the remaining cause and conditions for closure.
+
+After authorized repairs, verify that each reported cause is closed, its established same-cause paths are covered, legitimate use remains valid, and the repair has not introduced a direct regression in the affected paths. If the repair introduces another correctness problem of the same class or requires a new compensating coordination mechanism, treat the repair strategy as disproved: replace, revert, or redesign it instead of retaining it and adding another layer. If no stable repair can be established within the authorized scope, stop and report the unresolved repair constraint. Do not perform another discovery pass over unchanged work. Start a new full review only when explicitly requested or when the repair materially changes the reviewed contract or scope.
 
 For a design or architecture finding, use `$code-design` to shape the repair recommendation around the demonstrated cause and established constraints.
 
@@ -111,7 +130,9 @@ For a design or architecture finding, use `$code-design` to shape the repair rec
 
 For a small change, keep a brief account of key calls, boundaries, checks, and limits. For a module or project, maintain a lightweight record of included/excluded areas, relevant entry points, depth of examination, behavior/design coverage, candidate dispositions, verification, and unresolved high-risk areas. Keep it proportional; it need not be a separate deliverable.
 
-Distinguish deep tracing, local reading, and search-only coverage. Review is complete for a stated scope only after the planned important paths and boundaries are examined and high-risk candidates are resolved or explicitly left unverified. Reading every file is not proof of semantic coverage. Finding count is never a stop condition.
+Distinguish deep tracing, local reading, and search-only coverage. Review is complete when the initially planned important paths and boundaries, together with direct extensions required to establish or refute encountered candidates, have been examined to the stated depth; every material candidate has been established, refuted, or explicitly left unverified; and consequential coverage limits have been stated. Reading every file is not proof of semantic coverage.
+
+Do not enlarge the completion condition with incidental concerns discovered after the planned coverage is complete. Finding count is never a stop condition, but neither is the theoretical possibility of finding another issue a reason to continue.
 
 When time, tools, or environment prevent completion, narrow the completion claim and identify consequential gaps. Do not claim to exhaust all possible defects.
 
@@ -121,7 +142,7 @@ Adapt to the user's or project's format. By default provide:
 
 1. Scope, stage, and consequential assumptions, briefly.
 2. Findings ordered by action priority, with location, causal evidence, impact, and complete repair direction. Include relevant uncertainty and verification without forcing a long field template.
-3. Concrete unresolved leads worth further investigation, when any.
+3. Consequential unresolved leads, only when the missing fact and the evidence needed to resolve it are specific. Treat them as limits of this review, not as an automatic follow-up queue.
 4. Coverage, validation results, and material limits.
 
 A finding should be understandable without the review conversation. Cite the actual defect or contract location and supporting paths where necessary. Preserve all independent actionable findings while removing repetition and unsupported preferences. If none are established, say so within the reviewed scope.

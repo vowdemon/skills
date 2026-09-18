@@ -4,7 +4,7 @@ description: You MUST use this for any code design or implementation. Decide how
 license: MIT
 metadata:
   author: vowdemon
-  version: "1.2"
+  version: "1.3"
 ---
 
 # Code Design
@@ -131,6 +131,6 @@ Explain one complete main path before its qualifications. State when an alternat
 
 Use a relationship diagram when it clarifies ownership or dependencies, a flowchart for branching, or a sequence diagram for interaction order. Label the connections and use the same roles, states, and operations across prose, diagram, and code. Let each contribute information instead of repeating the same content three times. A small local design may need no diagram.
 
-After completing a code design, use `$code-review` to assess the resulting proposal before delivery.
+After completing a code-design batch, use `$code-review` once to assess the resulting proposal before delivery. Corrections made from that review require focused re-verification, not another full review, unless they materially change the design's contract or scope.
 
 Finish when the supported choice, responsibilities, and visible mechanism agree, with consequential unknowns still explicit. For a completed probe, finish with its evidence and conclusion within the agreed bound. Report what was actually implemented or verified separately from proposals. Do not substitute a design essay for authorized implementation work.

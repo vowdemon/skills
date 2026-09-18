@@ -50,6 +50,10 @@ Check state and cache keys against the correct identity and scope. Clearing visi
 
 For shared mutation, check atomicity of read-modify-write operations, competing ownership, lost updates, and whether the mechanism covers all writers. A local lock does not necessarily serialize another process or external writer.
 
+When evaluating or verifying a repair, identify the complete synchronization or authority domain: the relevant actors, the state or result they may mutate or publish, and the point that orders or validates the commit. A mechanism that handles only the observed pairwise interleaving is incomplete when another established actor or lifecycle transition remains outside that domain.
+
+A counter, generation token, lock, queue, cancellation check, or similar mechanism is not proof by its presence. Verify its owner, update or exclusion rule, validity and cleanup, commit check, and coverage of the relevant actors. If the mechanism creates another same-class interleaving, treat that as evidence that the repair strategy is unsound rather than adding another compensating mechanism by default.
+
 Investigate practical reachability and existing protection before reporting an interleaving. Explain the ordering assumption if it remains unresolved.
 
 ## Partial Failure, Retry, and Recovery

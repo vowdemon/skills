@@ -32,6 +32,8 @@ Distinguish whether the defect exists, how far its consequences reach, and wheth
 - If existence is established but reach, frequency, or severity is uncertain, report the proven scope and qualify the rest.
 - If the defect is established but the implementation choice is open, specify the invariant and acceptance criteria without inventing a fully worked solution.
 
+An unresolved lead is terminal for the current review pass. It does not become a finding through repeated investigation without new evidence or an explicit request to continue.
+
 For example, a stale request may demonstrably overwrite newer state while cross-account leakage remains unverified. Report the overwrite and do not upgrade the unverified consequence into fact.
 
 If the requested format uses confidence, high confidence means the critical causal facts have been checked; a static proof can qualify. State the actual residual condition for lower confidence. Do not use a low-confidence label to admit unsubstantiated findings. Confidence does not replace impact or action priority.
@@ -56,6 +58,8 @@ Do not hide independent issues under vague labels such as “refactor lifecycle 
 ## Calibrate Action Priority
 
 Use the user's or project's priority scheme when supplied. Otherwise P0–P3 represents when an issue should be addressed, considering consequence, scope, likelihood, recoverability, established delivery goals, and specific expansion or migration costs.
+
+Assign action priority only after the defect or design deficiency has passed its evidence gate. A candidate's possible severity must not be used to prove its existence.
 
 | Priority | Meaning |
 |---|---|
@@ -87,6 +91,14 @@ Start at the concrete failure or design deficiency:
 5. What correction there would eliminate the established manifestations?
 
 Stop at a specific responsibility that explains the problem and admits a verifiable repair. “Bad architecture” is not an actionable root cause. Do not indefinitely climb toward a framework replacement or whole-system rewrite. A genuinely local defect may have a genuinely local repair.
+
+### Make repairs converge
+
+Before changing code, describe the invariant the repair must restore, the owner with enough knowledge and control to enforce it, and the established paths the mechanism must cover. For concurrency and lifecycle problems, also identify the actors that may mutate or publish, the intended ordering or authority semantics, the serialization domain, and the commit or invalidation point. Do not discover this design by successively patching observed pairs of actors.
+
+Prefer a repair that contracts the problematic state space: remove unsupported sharing, unify authority, serialize at the responsible boundary, reuse an existing guarantee, or eliminate unnecessary asynchronous or duplicated coordination where the contract permits it. Additional state or coordination can be necessary, but each flag, counter, token, lock, queue, callback, or lifecycle state must enforce a distinct established guarantee with clear ownership, transitions, and validity.
+
+If verification reveals that the repair itself introduces another failure of the same class, the repair has not restored the invariant. Replace, revert, or redesign that mechanism rather than preserving it and adding a compensating layer. Continue with multiple mechanisms only when they protect distinct established invariants; if a stable repair cannot be established within the authorized scope, report the unresolved repair constraint instead of continuing an autonomous patch chain.
 
 ### Compare sufficient alternatives
 
@@ -125,6 +137,6 @@ Use a concrete title describing the defect or consequence. In the body, establis
 
 Treat these as information requirements, not mandatory subheadings. Follow the requested output format. Use supporting paths to establish causality rather than listing many suspicious lines with no argument.
 
-Avoid principle-only labels, vague possible harm, arbitrary finding limits, duplicated symptoms, and architecture proposals used to conceal weak evidence. Do not downgrade a sound independent issue merely to shorten the report; remove repetition instead.
+Avoid principle-only labels, vague possible harm, arbitrary finding limits, duplicated symptoms, and architecture proposals used to conceal weak evidence. Do not downgrade a sound independent issue merely to shorten the report; remove repetition instead. The absence of a finding limit does not require continued discovery merely because more time or context remains; preserve established independent findings within the planned boundary, then stop when coverage and verification are complete.
 
 Keep unresolved leads separate from established findings, with the specific missing fact. State actual checks and their limits, and distinguish recommendations from implemented or verified repairs. A clean review can contain no findings within its stated coverage.
