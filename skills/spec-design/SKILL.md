@@ -1,17 +1,17 @@
 ---
 name: spec-design
-description: Use when a PRD, product idea, feature, bug, or existing behavior needs clarification and a stable specification before code design or implementation. Also use when reviewing a specification for ambiguity, gaps, contradictions, or unverifiable behavior. Use this skill for OpenSpec specifications as well.
+description: Use when the requested work is to write, revise, or explicitly review a specification document, including an OpenSpec specification. Do not invoke merely because a product idea, feature, bug, design, or implementation task could be described in a spec.
 license: MIT
 metadata:
   author: vowdemon
-  version: "1.0"
+  version: "2.0"
 ---
 
 # Spec Design
 
 ## Overview
 
-Turn a PRD, rough requirement, or product idea into a stable specification that can guide multiple implementations toward the same business behavior. Describe the capability in enough detail to reproduce its intended design without binding it to current code structure or technology choices.
+When a specification document is the requested deliverable, turn the requirements and scope aligned with the user into a stable specification that can guide multiple implementations toward the same business behavior. Describe the capability in enough detail to reproduce its intended design without binding it to current code structure or technology choices. Source material alone does not call for a spec; a page design or other requested artifact should keep its own form.
 
 Use this skill for a complete capability specification. Keep change proposals, code plans, implementation tasks, and low-level technical designs separate.
 
@@ -23,15 +23,14 @@ The specification sections have distinct responsibilities:
 - `Design` defines the stable, implementation-independent design of the capability.
 - `Requirements` state the observable behavior that must hold.
 - `Scenario` blocks verify and constrain the design through BDD examples.
-- `Open Questions`, when needed, expose defects, ambiguity, or missing definitions in the specification.
 
-Keep these sections consistent. If a design detail affects observable behavior and must remain stable, cover it with a requirement and at least one scenario. If a requirement introduces behavior absent from the design, update the design. Treat unresolved conflicts as open questions rather than choosing an interpretation silently.
+Keep these sections consistent. If a design detail affects observable behavior and must remain stable, cover it with a requirement and at least one scenario. If a requirement introduces behavior absent from the design, update the design. Resolve conflicts with the user before writing the affected specification; do not silently choose an interpretation.
 
 ## Scope Check
 
 Before drafting, decide whether the request describes one coherent capability. Split it into separate specs when parts have different goals, rules, lifecycles, or can be released and verified independently. Keep multiple states or branches in one spec when they belong to the same capability.
 
-Clarify missing information only when it materially changes the purpose, design, requirements, or scenarios. Record unresolved matters in `Open Questions`; do not invent behavior to make the document appear complete.
+Before drafting, align every function and consequential rule that will appear in the specification with the user, as described in `$prd-guide`. Clarify missing information that changes the purpose, design, requirements, or scenarios. External examples and familiar patterns can inform a proposal but cannot authorize a requirement. Do not invent behavior or leave unresolved decisions in a completed specification.
 
 ## Output Contract
 
@@ -56,7 +55,7 @@ for different implementations to reproduce the same business behavior.>
 ## <Optional supporting section>
 
 <Add only when the spec needs an independent kind of explanation that does not
-fit naturally in Purpose, Design, Requirements, or Open Questions.>
+fit naturally in Purpose, Design, or Requirements.>
 
 ## Requirements
 
@@ -72,16 +71,7 @@ The system SHALL <one observable and verifiable behavior>.
 - **AND** <additional outcome, when needed>
 ```
 
-When unresolved issues exist, append this section:
-
-```markdown
-## Open Questions
-
-- <Question>. This spec does not define <missing behavior>.
-- <Question>. This spec does not define <missing detail> in sufficient detail.
-```
-
-Keep `Purpose`, `Design`, and `Requirements` as level-two headings. Keep `Open Questions` at level two when present. Keep requirement headings in the exact form `### Requirement: ...` and scenario headings in the exact form `#### Scenario: ...` so OpenSpec-style tooling can recognize them.
+Keep `Purpose`, `Design`, and `Requirements` as level-two headings. Keep requirement headings in the exact form `### Requirement: ...` and scenario headings in the exact form `#### Scenario: ...` so OpenSpec-style tooling can recognize them.
 
 ## Purpose Rules
 
@@ -124,34 +114,27 @@ Every scenario must use `GIVEN`, `WHEN`, and `THEN`; use `AND` only for addition
 
 Cover the cases that materially constrain the design, including relevant success paths, invalid input, empty states, permissions, repeated actions, boundary values, dependency failures, partial failures, and recovery behavior. Do not create scenarios mechanically for cases that do not apply.
 
-## Open Questions Rules
+## Resolve Questions Before Delivery
 
-Include `## Open Questions` only when the specification has unresolved issues. When present, keep it as the final section and use it to identify:
-
-- behavior the spec has not defined
-- behavior mentioned but not defined in sufficient detail
-- conflicting rules that still need a decision
-- missing decisions that could change the design or requirements
-
-State the missing definition directly and explain why the question remains open when useful. Do not hide open questions inside requirements or resolve them through unstated assumptions. Omit the entire section when no open questions remain.
+Keep missing definitions and conflicting rules in the conversation while resolving them with the user. Do not add an `Open Questions`, `To Be Confirmed`, or equivalent section to a completed specification. Do not write a requirement around an unconfirmed feature or choose a default from industry practice. If a question remains unanswered, pause the affected specification work and ask; a partial working discussion is not a completed specification.
 
 ## Additional Sections
 
-Add another level-two section only when the spec needs a distinct type of explanation that cannot fit naturally in Purpose, Design, Requirements, or Open Questions. Name it for its actual content and keep it at the stable specification layer. Do not add standard sections by habit or repeat information already expressed elsewhere.
+Add another level-two section only when the spec needs a distinct type of explanation that cannot fit naturally in Purpose, Design, or Requirements. Name it for its actual content and keep it at the stable specification layer. Do not add standard sections by habit or repeat information already expressed elsewhere.
 
-Place supporting sections where they best preserve the reading flow. Keep `Open Questions` last when present.
+Place supporting sections where they best preserve the reading flow.
 
 ## OpenSpec Compatibility
 
-When working in an OpenSpec project, inspect its existing specs, configuration, and workflow instructions before deciding the output form. Preserve the project's distinction between current specifications and proposed changes, and keep requirement and scenario structures compatible with its tooling.
+When writing or revising an OpenSpec specification, inspect its existing specs, configuration, and workflow instructions before deciding the output form. Preserve the project's distinction between current specifications and proposed changes, and keep requirement and scenario structures compatible with its tooling.
 
 Treat Design and other optional sections as extensions that must not interfere with structured requirement blocks. Prefer project conventions over generic assumptions, and use available OpenSpec validation when appropriate.
 
 ## Bug Specifications
 
-For a bug, specify the intended correct behavior rather than the implementation of the fix. Design should explain the correct execution path at the level needed to make the behavior reproducible.
+For a bug specification, specify the intended correct behavior rather than the implementation of the fix. Design should explain the correct execution path at the level needed to make the behavior reproducible.
 
-Requirements and scenarios should constrain that path and cover the conditions that exposed the defect as regression behavior. Use the observed faulty behavior only as context, update existing behavior instead of duplicating it, and record uncertainty in Open Questions.
+Requirements and scenarios should constrain that path and cover the conditions that exposed the defect as regression behavior. Use the observed faulty behavior only as context, update existing behavior instead of duplicating it, and clarify uncertainty before finalizing.
 
 ## Review Checklist
 
@@ -164,7 +147,7 @@ Before finalizing, verify that:
 - Every scenario uses the exact heading level and GIVEN/WHEN/THEN structure.
 - Critical success, failure, and boundary behavior is covered where relevant.
 - Design, requirements, and scenarios do not contradict one another.
-- Missing or ambiguous behavior is listed in Open Questions, and the section is omitted when none exists.
+- Every function and consequential rule has been aligned with the user, and no unresolved behavior remains in the completed document.
 - The document describes one coherent capability.
 
 ## Red Flags
@@ -180,8 +163,7 @@ Stop and revise when:
 - A scenario omits `GIVEN`, `WHEN`, or `THEN`, or uses the wrong heading level.
 - Requirements and scenarios describe incompatible outcomes for the same condition.
 - The document adds a separate acceptance-criteria section that duplicates scenarios.
-- Missing decisions are silently converted into assumptions instead of Open Questions.
-- Open Questions contain resolved decisions or implementation tasks.
+- An unaligned function or unresolved decision appears in a completed specification.
 - Optional sections repeat existing content or exist only to fill a template.
 - One spec combines capabilities with independent goals, rules, or lifecycles.
 
@@ -198,6 +180,6 @@ Stop and revise when:
 | Creating a separate acceptance-criteria list | Use scenarios as the acceptance criteria for each requirement |
 | Adding fixed boundary or dependency sections by habit | Explain relevant context naturally and add a section only when the content needs one |
 | Describing a dependency only by name | Define its observable effect in Design and cover failure behavior when it matters |
-| Guessing through ambiguity | Record the exact missing or insufficient definition in Open Questions |
-| Adding an empty Open Questions section | Omit the section when no unresolved issue exists |
+| Guessing through ambiguity | Ask the user to resolve the exact missing or insufficient definition before drafting the affected behavior |
+| Adding unresolved questions to the final document | Keep clarification in the conversation; deliver the specification only after its behavior is settled |
 | Adding every possible edge case | Cover cases that materially constrain the design and omit irrelevant ceremony |

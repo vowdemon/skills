@@ -11,9 +11,10 @@ Type describes how a skill directs work: heuristic processes guide judgment, pre
 | [code-review](skills/code-review/SKILL.md)                   | Prescriptive Process | Reviews behavior and architecture after code design or implementation, including contracts, state, lifecycles, and module boundaries. |
 | [git-commit](skills/git-commit/SKILL.md)                     | Prescriptive Process | Inspects changes, stages deliberately, and prepares safe Conventional Commits with appropriate verification.                          |
 | [normative-writing](skills/normative-writing/SKILL.md)       | Prescriptive Process | Normalizes settled technical rules into precise, compact, and internally consistent normative text.                                   |
-| [prd-design](skills/prd-design/SKILL.md)                     | Prescriptive Process | Writes and reviews PRDs by clarifying goals, users, scope, metrics, acceptance criteria, risks, and dependencies.                     |
-| [spec-design](skills/spec-design/SKILL.md)                   | Prescriptive Process | Turns ideas, bugs, and PRDs into stable, verifiable behavior specifications before code design.                                       |
+| [prd-guide](skills/prd-guide/SKILL.md)                       | Prescriptive Process | Clarifies requirements and aligns every proposed function before it enters a design.                                                |
+| [spec-design](skills/spec-design/SKILL.md)                   | Prescriptive Process | Writes, revises, or reviews requested specifications from aligned behavior and scenarios.                                          |
 | [test-design](skills/test-design/SKILL.md)                   | Heuristic Process     | Designs and reviews test systems around consequential claims, trustworthy evidence, and testability.                                  |
+| [ui-ux-design](skills/ui-ux-design/SKILL.md)                 | Prescriptive Process  | Designs, reviews, or implements interfaces using aligned functions and interaction decisions.                                      |
 | [wenyan](skills/wenyan/SKILL.md)                             | Strict Mode           | Uses concise Classical Chinese when brevity or a Wenyan response style is requested.                                                  |
 
 ## Sources

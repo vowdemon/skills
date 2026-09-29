@@ -1,0 +1,4 @@
+interface:
+  display_name: "PRD Guide"
+  short_description: "Clarify requirements that guide design decisions."
+  default_prompt: "Use $prd-guide to understand the requirements guiding this design."
