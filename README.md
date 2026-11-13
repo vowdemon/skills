@@ -2,7 +2,7 @@
 
 **AI is already highly capable; a SKILL should orchestrate its abilities rather than duplicate knowledge it already possesses.**
 
-Type describes how a skill directs work: heuristic processes guide judgment, prescriptive processes define required steps, and strict modes impose a constrained response style.
+Type describes how a skill directs work. Heuristic processes guide judgment, and prescriptive processes define required steps.
 
 | Skill                                                        | Type          | Description                                                                                                                           |
 | ------------------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
@@ -11,11 +11,12 @@ Type describes how a skill directs work: heuristic processes guide judgment, pre
 | [code-review](skills/code-review/SKILL.md)                   | Prescriptive Process | Reviews behavior and architecture after code design or implementation, including contracts, state, lifecycles, and module boundaries. |
 | [git-commit](skills/git-commit/SKILL.md)                     | Prescriptive Process | Inspects changes, stages deliberately, and prepares safe Conventional Commits with appropriate verification.                          |
 | [normative-writing](skills/normative-writing/SKILL.md)       | Prescriptive Process | Normalizes settled technical rules into precise, compact, and internally consistent normative text.                                   |
-| [prd-guide](skills/prd-guide/SKILL.md)                       | Prescriptive Process | Clarifies requirements and aligns every proposed function before it enters a design.                                                |
-| [spec-design](skills/spec-design/SKILL.md)                   | Prescriptive Process | Writes, revises, or reviews requested specifications from aligned behavior and scenarios.                                          |
+| [prd-guide](skills/prd-guide/SKILL.md)                       | Heuristic Process | Clarifies consequential requirements and turns them into verifiable criteria. |
+| [spec-design](skills/spec-design/SKILL.md)                   | Prescriptive Process | Writes, revises, or reviews requested specifications from established behavior and scenarios. |
 | [test-design](skills/test-design/SKILL.md)                   | Heuristic Process     | Designs and reviews test systems around consequential claims, trustworthy evidence, and testability.                                  |
-| [ui-ux-design](skills/ui-ux-design/SKILL.md)                 | Prescriptive Process  | Designs, reviews, or implements interfaces using aligned functions and interaction decisions.                                      |
-| [wenyan](skills/wenyan/SKILL.md)                             | Strict Mode           | Uses concise Classical Chinese when brevity or a Wenyan response style is requested.                                                  |
+| [ui-ux-design](skills/ui-ux-design/SKILL.md)                 | Heuristic Process | Designs, reviews, or implements interfaces for the requested tasks and constraints. |
+
+Archived skills are kept in [history](history), including [wenyan](history/wenyan/SKILL.md).
 
 ## Sources
 

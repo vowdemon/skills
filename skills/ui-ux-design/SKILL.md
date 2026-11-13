@@ -1,6 +1,6 @@
 ---
 name: ui-ux-design
-description: Use when the requested work explicitly involves interface flows, layout, visual design, UI review, or implementation of a specified interface. Align every function and consequential interaction with the user before including it in a final UI/UX design.
+description: Use when the requested work explicitly involves interface flows, layout, visual design, UI review, or implementation of a specified interface. Design for the established tasks, scope, and constraints.
 license: MIT
 metadata:
   author: vowdemon
@@ -15,19 +15,17 @@ Design an interface for the task people need to complete. Apply only the parts o
 
 Identify whether the user wants a new UI/UX design, a review, or implementation, and the expected fidelity of the result. Use `$prd-guide` to clarify an ambiguous deliverable before producing interface detail. If the request is for product-level page planning rather than UI/UX work, keep the output at that level.
 
-Take the intended users and tasks, required or excluded information, available or excluded actions, capability boundaries, and constraints from the product scope aligned under `$prd-guide`. Inspect an existing interface or design system when it affects the request. If a product-defining choice is missing, stop before drafting or editing the interface design that depends on it and resolve it with the user. An assumption label in the finished artifact does not substitute for that decision. Do not use a layout or interaction pattern to silently define product scope.
+Use the established product scope for intended users and tasks, required or excluded information and actions, capability boundaries, and constraints. Inspect the existing interface or design system when relevant. Use the decision criteria in `$prd-guide` if an interface choice exposes a consequential gap in product scope.
 
-Establish the platforms, input methods, and viewport ranges relevant to the requested result from the brief or product context. If an unresolved platform choice would materially change the design, ask before drafting the affected layout. Work within the established scope rather than adding variants to make the artifact look complete.
+Establish the relevant platforms, input methods, and viewport ranges from the brief or product context. Clarify an unresolved platform choice when it would materially change the design and the available context gives no sound basis for choosing.
 
-Distinguish user requirements, observed behavior, applicable platform conventions, supported deductions, assumptions, and design recommendations. Conventions and external examples can support a recommendation, but every function or consequential interaction they suggest still needs user alignment. Do not present a recommendation as a requirement or claim user research, accessibility results, or platform behavior that has not been established.
+Distinguish user requirements, observed behavior, applicable platform conventions, supported deductions, assumptions, and design recommendations. Use conventions and examples as evidence for recommendations within scope. Report user research, accessibility results, and platform behavior at the level the available evidence supports.
 
-## Resolve interface choices interactively
+## Resolve interface choices
 
-Identify the UI and UX choices that materially change what people see, understand, do, or recover from. Examples include information hierarchy, navigation, interaction pattern, important states, and visual direction when visual design is in scope. Ask about the most consequential unresolved choice first, with concrete options and a recommendation when the brief supports one. Keep the recommendation conditional until the user responds.
+Identify choices that materially change what people see, understand, do, or recover from. Consider information hierarchy, navigation, interaction patterns, important states, and visual direction when relevant. Use established decisions and choose delegated details within scope.
 
-Ask one question per message and wait for the answer before drafting or editing work that depends on that choice. Use the answer to decide whether another question remains; do not send a fixed questionnaire. A request to produce a design or a delegation to propose an approach does not approve its functions. Decide reversible local details within the aligned direction without seeking a separate approval for each one.
-
-For every new or materially changed interface design, present a reviewable direction before the final artifact. Show how the aligned information and actions are presented, the main interaction, and important states and consequences. Check every function and consequential interaction against the scope inventory; propose and align any new item before adding it. Ask the user to confirm or correct the complete direction, then incorporate the response. For a review, report findings against the existing brief; for a narrowly specified change, stay within the aligned scope and direction and return to the user if either expands.
+For a new or materially changed interface, show the proposed information hierarchy, main interaction, and important states and consequences at the fidelity the user requested. Explain consequential choices and use the existing brief as the basis for reviews and narrowly specified changes.
 
 ## Design the experience
 
@@ -49,6 +47,6 @@ Use visual treatment and motion to clarify meaning, causality, or state change. 
 
 Observe an existing product or analogous platform behavior when that can settle a disputed mechanism. Prototype an interaction when text or static representations cannot reveal whether it works. Compare alternatives with the task, content, environment, and unrelated choices held stable enough to isolate the decision. A prototype supports only the behavior it actually preserves; visual polish does not establish comprehension or integration.
 
-For a design deliverable, present only the aligned functions and decisions with the reasoning needed to understand them. Do not include a “to be confirmed” section or unresolved product choices in a completed design. Keep unresolved questions in the conversation and wait for answers before finalizing. For a review, explain each finding through the user consequence and the observed or projected mechanism; prioritize blocked tasks, harmful actions, exclusion, and hard recovery. Preserve unaffected behavior unless a concrete benefit justifies changing it.
+For a design deliverable, present the functions and decisions in scope with the reasoning needed to understand them. Label recommendations and any open dependency that limits the result. For a review, explain each finding through the user consequence and the observed or projected mechanism. Prioritize blocked tasks, harmful actions, exclusion, and hard recovery. Preserve unaffected behavior unless a concrete benefit justifies changing it.
 
 For implementation, carry settled meanings, states, transitions, feedback, semantics, and visual behavior into the interface. Inspect the rendered and interactive result on the relevant platform and viewport. Source code or passing structural tests alone do not establish visual hierarchy, focus behavior, or interaction fidelity. Report what was actually verified and keep unsupported claims conditional.

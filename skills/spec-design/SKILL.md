@@ -11,7 +11,7 @@ metadata:
 
 ## Overview
 
-When a specification document is the requested deliverable, turn the requirements and scope aligned with the user into a stable specification that can guide multiple implementations toward the same business behavior. Describe the capability in enough detail to reproduce its intended design without binding it to current code structure or technology choices. Source material alone does not call for a spec; a page design or other requested artifact should keep its own form.
+When a specification document is the requested deliverable, turn established requirements and scope into a stable specification that can guide multiple implementations toward the same business behavior. Describe the capability in enough detail to reproduce its intended design without binding it to current code structure or technology choices. Source material alone does not call for a spec; a page design or other requested artifact should keep its own form.
 
 Use this skill for a complete capability specification. Keep change proposals, code plans, implementation tasks, and low-level technical designs separate.
 
@@ -30,7 +30,7 @@ Keep these sections consistent. If a design detail affects observable behavior a
 
 Before drafting, decide whether the request describes one coherent capability. Split it into separate specs when parts have different goals, rules, lifecycles, or can be released and verified independently. Keep multiple states or branches in one spec when they belong to the same capability.
 
-Before drafting, align every function and consequential rule that will appear in the specification with the user, as described in `$prd-guide`. Clarify missing information that changes the purpose, design, requirements, or scenarios. External examples and familiar patterns can inform a proposal but cannot authorize a requirement. Do not invent behavior or leave unresolved decisions in a completed specification.
+Base functions and consequential rules on the request, prior decisions, and established project contracts. Apply delegated choices within scope and use the decision criteria in `$prd-guide` for consequential gaps. Use external examples to support proposals and identify the basis for each requirement.
 
 ## Output Contract
 
@@ -116,7 +116,7 @@ Cover the cases that materially constrain the design, including relevant success
 
 ## Resolve Questions Before Delivery
 
-Keep missing definitions and conflicting rules in the conversation while resolving them with the user. Do not add an `Open Questions`, `To Be Confirmed`, or equivalent section to a completed specification. Do not write a requirement around an unconfirmed feature or choose a default from industry practice. If a question remains unanswered, pause the affected specification work and ask; a partial working discussion is not a completed specification.
+Reconcile missing definitions and conflicting rules using the available requirements and project context. If a question still determines normative behavior, clarify that question and continue work on independent sections. State the resulting scope accurately and keep unresolved behavior out of normative requirements.
 
 ## Additional Sections
 
@@ -147,7 +147,7 @@ Before finalizing, verify that:
 - Every scenario uses the exact heading level and GIVEN/WHEN/THEN structure.
 - Critical success, failure, and boundary behavior is covered where relevant.
 - Design, requirements, and scenarios do not contradict one another.
-- Every function and consequential rule has been aligned with the user, and no unresolved behavior remains in the completed document.
+- Every function and consequential rule has an established basis, and the specification states the scope it covers.
 - The document describes one coherent capability.
 
 ## Red Flags
@@ -163,7 +163,7 @@ Stop and revise when:
 - A scenario omits `GIVEN`, `WHEN`, or `THEN`, or uses the wrong heading level.
 - Requirements and scenarios describe incompatible outcomes for the same condition.
 - The document adds a separate acceptance-criteria section that duplicates scenarios.
-- An unaligned function or unresolved decision appears in a completed specification.
+- A normative requirement relies on an unresolved decision or has no established basis.
 - Optional sections repeat existing content or exist only to fill a template.
 - One spec combines capabilities with independent goals, rules, or lifecycles.
 
@@ -181,5 +181,5 @@ Stop and revise when:
 | Adding fixed boundary or dependency sections by habit | Explain relevant context naturally and add a section only when the content needs one                       |
 | Describing a dependency only by name                  | Define its observable effect in Design and cover failure behavior when it matters                          |
 | Guessing through ambiguity                            | Ask the user to resolve the exact missing or insufficient definition before drafting the affected behavior |
-| Adding unresolved questions to the final document     | Keep clarification in the conversation; deliver the specification only after its behavior is settled       |
+| Treating an open decision as a requirement           | Clarify the affected behavior and specify the established scope                                            |
 | Adding every possible edge case                       | Cover cases that materially constrain the design and omit irrelevant ceremony                              |

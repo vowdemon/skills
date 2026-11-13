@@ -39,26 +39,26 @@ If the user asks for a message, do not run `git commit`. If the user asks to com
 ## Workflow
 
 1. Run `git status --short`.
-2. Inspect relevant changes with `git diff`, `git diff --staged`, or path-specific diffs.
-3. Separate task changes from pre-existing or unrelated user changes.
-4. Run the atomic commit check. If changes are loosely related or too complex for one clear subject, propose a split commit plan before staging.
+2. Inspect both `git diff --staged` and `git diff`. Inspect relevant untracked files directly.
+3. Determine which staged and unstaged changes belong to the requested commit. Check mixed files at the hunk level. Choose an isolation method before modifying an index that already contains unrelated changes.
+4. Run the atomic commit check. Group independent changes separately within the requested scope.
 5. Choose verification based on changed files. Run it when practical; if skipped, record why.
-6. Stage only the intended paths. Prefer explicit paths over `git add .`.
-7. Re-check `git diff --staged --stat` and, when useful, `git diff --staged`.
+6. Select only the intended changes using the staging rules below.
+7. Inspect the exact diff that will enter the commit. For an ordinary commit, run `git diff --staged` after staging.
 8. Commit with a clear subject, using Conventional Commits by default unless the repository uses another convention. Use additional `-m` bodies when the why is not obvious.
 9. Report subject, staged scope, verification run, and any skipped checks.
 
 ## Staged Message Workflow
 
-Use this stricter workflow when the user asks for a commit message for staged changes, asks to review a staged commit message, or staged changes already exist:
+Use this workflow when the user asks for a message for staged changes or asks to review a message against the staged changes. For an explicit commit request, use the commit workflow and treat any existing staged changes as part of the scope inspection.
 
 1. Run `git status --short`.
 2. Run `git diff --cached` and analyze only the staged diff.
 3. Ignore unstaged working tree changes when generating the message. Mention them only if they create risk for staging or committing.
 4. If the staged diff is empty, stop and say there are no staged changes.
 5. If the staged diff mixes unrelated intents, propose a split before generating one message unless the user explicitly asked for a single commit.
-6. If you are uncertain about the staged change's meaning or cannot summarize it accurately, ask before guessing. Give exactly three possible interpretations labeled `1`, `2`, and `3`, and ask the user to choose or provide the correct meaning.
-7. Generate the message, then wait for user review before committing unless the user has already clearly asked you to commit after inspection.
+6. If the meaning is still unclear after inspection and changes the message, ask a focused question about the uncertain intent.
+7. Return the requested message or review.
 
 For staged message generation, use this format by default:
 
@@ -90,7 +90,7 @@ Keep together when:
 - Small formatting, renaming, or cleanup is inseparable from the current change.
 - Splitting would create commits that do not build, do not pass tests, or are misleading alone.
 
-When splitting is appropriate, stop before staging and propose a commit plan with subjects, file groups, and the reason for the split. Ask for confirmation unless the user already requested that exact split. If the user explicitly wants one commit, obey only after confirming no unrelated user changes are included.
+When splitting is appropriate and the request leaves grouping open, use the coherent groups supported by the diff. Respect a requested commit count or grouping. Ask only when inspection cannot establish which changes belong together or which are in scope.
 
 ## Message Format
 
@@ -249,11 +249,11 @@ Before committing, be able to justify:
 
 ## Staging Rules
 
-- Prefer `git add path/to/file` for known files.
-- Avoid `git add .` in a dirty worktree unless every changed file was inspected and belongs in the commit.
-- Never stage unrelated user changes to make the tree clean.
-- Include generated files only when they are the expected output of source changes.
-- If the staged diff contains unrelated work, unstage before committing.
+- Use `git add -- <path>` only when every unstaged change in the path belongs to the commit. Leave intended hunks that are already staged in place.
+- When a tracked file contains both intended and unrelated unstaged changes, select only the intended hunks with `git add -p -- <path>`. Split a hunk or stage an exact patch against the index when the default hunk includes both. Verify the staged and unstaged diffs for that path after selection. If the changes cannot be separated reliably, leave that path untouched and clarify the scope.
+- Preserve unrelated staged changes. When they are on other paths and every change to each intended path known to Git belongs to the task, `git commit --only -- <paths>` can commit those whole paths while leaving the unrelated index entries staged. Inspect `git diff HEAD -- <paths>` and verify the paths before using it. A path-limited commit takes the working-tree content and is unsuitable for a partially selected file.
+- If a plain commit would include unrelated staged hunks and a whole-path commit cannot isolate the intended changes, leave the index intact unless you can isolate the commit and preserve the other staged hunks. Ask about the specific conflict if it blocks the requested commit.
+- Include generated files when they are the expected output of source changes and belong to the commit.
 
 ## Verification Rules
 
