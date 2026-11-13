@@ -14,11 +14,13 @@ Use this reference to resolve finding boundaries, evidence strength, priority, r
 
 ## Establish an Actionable Finding
 
-A finding establishes that, under identified conditions, a specific mechanism violates an effective contract or creates a concrete design deficiency, with an impact worth correcting. Locate the defect or erroneous contract and use callers or related paths as supporting evidence.
+A finding establishes that, under identified conditions, a specific mechanism violates an effective contract or creates a concrete design deficiency, with an observable consequence or a specific present maintenance burden. Locate the defect or erroneous contract and use callers or related paths as supporting evidence.
 
 For behavior, connect expectation, legitimate trigger, execution/state transition, consequence, and insufficient protection. For architecture, connect a real responsibility or quality goal, structural evidence, the missing guarantee or knowledge/change burden, and the responsible correction boundary.
 
 Present design errors can be actionable before they cause runtime faults. For example, a proposed configuration loader that owns editing state and motivates a separate saver can already misclassify one cohesive responsibility. Report the established classification and split, not an invented history of resulting production incidents.
+
+Unnecessary implementation can also establish a present maintenance defect. Identify the extra rule, representation, branch, or protocol a maintainer must understand or keep consistent, and show a complete simplification that preserves supported behavior. A proven unreachable fallback or redundant conversion with this burden qualifies as a finding without a runtime failure or a forecast of future growth.
 
 Conversely, a suffix, duplicate line, or interface with one implementation is only a lead. An undocumented hypothetical future consumer is not enough to demand an extension point. An alternative design being possible does not make the existing design wrong.
 
@@ -59,14 +61,14 @@ Do not hide independent issues under vague labels such as “refactor lifecycle 
 
 Use the user's or project's priority scheme when supplied. Otherwise P0–P3 represents when an issue should be addressed, considering consequence, scope, likelihood, recoverability, established delivery goals, and specific expansion or migration costs.
 
-Assign action priority only after the defect or design deficiency has passed its evidence gate. A candidate's possible severity must not be used to prove its existence.
+Assign action priority only after the defect or design deficiency has passed its evidence gate. A candidate's possible severity must not be used to prove its existence. Every independent, established issue within scope must be reported; category, size, rarity, and low priority are not exclusion grounds. Priority determines handling order only.
 
 | Priority | Meaning |
 |---|---|
 | P0 | Immediate action for a catastrophic issue, such as broad irreversible corruption, a severe security failure, or complete loss of a critical service |
 | P1 | Important correction before the relevant delivery, merge, or design commitment; severe behavior failures or demonstrated architecture defects that block a key goal or imminently lock in a costly wrong contract |
 | P2 | A definite issue to schedule, with substantive correctness, reliability, comprehension, or maintenance impact that does not require the above urgency |
-| P3 | A limited local issue that remains worth correcting |
+| P3 | An established issue with limited, local impact |
 
 Explain the decisive factors rather than mechanically scoring every dimension. Do not confuse insufficient evidence with low severity; an unverified catastrophic hypothesis is an unresolved lead, not automatically P0 or P3.
 
@@ -137,6 +139,6 @@ Use a concrete title describing the defect or consequence. In the body, establis
 
 Treat these as information requirements, not mandatory subheadings. Follow the requested output format. Use supporting paths to establish causality rather than listing many suspicious lines with no argument.
 
-Avoid principle-only labels, vague possible harm, arbitrary finding limits, duplicated symptoms, and architecture proposals used to conceal weak evidence. Do not downgrade a sound independent issue merely to shorten the report; remove repetition instead. The absence of a finding limit does not require continued discovery merely because more time or context remains; preserve established independent findings within the planned boundary, then stop when coverage and verification are complete.
+Avoid principle-only labels, vague possible harm, arbitrary finding limits, duplicated symptoms, and architecture proposals used to conceal weak evidence. Shorten explanations and remove repetition to keep the report concise; preserve every independent finding and its supporting evidence. The absence of a finding limit does not require continued discovery merely because more time or context remains; stop when coverage and verification are complete within the planned boundary.
 
 Keep unresolved leads separate from established findings, with the specific missing fact. State actual checks and their limits, and distinguish recommendations from implemented or verified repairs. A clean review can contain no findings within its stated coverage.

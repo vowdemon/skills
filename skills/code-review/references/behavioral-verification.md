@@ -69,7 +69,7 @@ For each material failure boundary, determine:
 - Who owns rollback, compensation, deduplication, or later recovery?
 - Can cleanup or recovery itself fail, and what remains then?
 
-A timeout can mean the outcome is unknown. Do not infer that a remote operation failed merely because no response arrived. Check whether retry identifiers remain stable for the same logical operation, whether distinct operations stay distinct, and how long and where deduplication applies.
+A timeout can mean the outcome is unknown. Do not infer that a remote operation failed merely because no response arrived. Trace the logical operation's identity from its initiating caller through commit and recovery: who creates it, who retains it, and what a repeated invocation reuses. Check that the same operation retains its identity, distinct operations stay distinct, and deduplication covers the relevant scope and lifetime.
 
 A transaction protects only its actual participants and boundary. It does not automatically include a remote payment, email, or queue submission. Likewise, a retry loop with a limit does not make a non-idempotent operation safe.
 
